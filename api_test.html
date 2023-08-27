@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  .container {
+    width: 400px;
+    height: 400px;
+    background-color: #ffc400;
+    border: 1px solid #ccc;
+    display: block;
+    text-align: center;
+    margin: auto;
+  }
+
+  .emoticon {
+    font-size: 60px;
+  }
+
+  .button-container {
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  .random-joke-button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  .container-box{
+    margin-top: 100px;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <div class="container-box"> 
+        <span class="emoticon">😄</span>
+        <p id="jokeResult">  </p>
+        <button class="random-joke-button" id="generateJokeBtn">Generate Random Joke</button>
+    </div>
+</div>
+
+
+
+<script>
+//   const jokes = [
+//     "Why don't scientists trust atoms? Because they make up everything!",
+//     "Parallel lines have so much in common. It's a shame they'll never meet.",
+//     "Why did the scarecrow win an award? Because he was outstanding in his field!",
+//     // Add more jokes here
+//   ];
+
+//   const jokeResultElement = document.getElementById("jokeResult");
+//   const generateJokeBtn = document.getElementById("generateJokeBtn");
+
+//   generateJokeBtn.addEventListener("click", () => {
+//     const randomIndex = Math.floor(Math.random() * jokes.length);
+//     jokeResultElement.textContent = jokes[randomIndex];
+//   });
+
+let jokeResult = document.getElementById("jokeResult");
+let generateJokeBtn = document.getElementById("generateJokeBtn");
+let url = 'https://v2.jokeapi.dev/joke/Programming?blacklistFlags=religious,political,racist&type=single';
+async function getData() {
+  try {
+    const res = await fetch(url);
+    const jsonResult = await res.json();
+    console.log(jsonResult);
+    //debugger;
+    jokeResult.textContent = jsonResult.joke;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+
+generateJokeBtn.addEventListener("click", getData);
+// Call the 'getData' function once after the page loads to display an initial joke.
+getData();
+
+
+</script>
+
+</body>
+</html>
